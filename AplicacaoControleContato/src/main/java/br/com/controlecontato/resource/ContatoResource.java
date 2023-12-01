@@ -6,7 +6,14 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import br.com.controlecontato.dto.ContatoDTO;
 import br.com.controlecontato.dto.PessoaDTO;
@@ -41,7 +48,6 @@ public class ContatoResource {
 			@ApiResponse(responseCode = "500", description = "Erro interno no servidor") })
 	@Operation(summary = "Método responsável por retornar uma lista de contatos")
 	@GetMapping
-	@ResponseStatus(HttpStatus.OK)
 	public ResponseEntity<List<ContatoDTO>> listarContatos() {
 		List<ContatoDTO> contatos = contatoService.buscarTodos();
 		if (contatos == null) {
@@ -59,7 +65,6 @@ public class ContatoResource {
 			@ApiResponse(responseCode = "500", description = "Erro interno no servidor") })
 	@Operation(summary = "Método responsável por encontrar um contato")
 	@GetMapping("/{id}")
-	@ResponseStatus(HttpStatus.OK)
 	public ResponseEntity<ContatoDTO> buscarPorId(@PathVariable Long id) throws Exception {
 		try {
 			ContatoDTO contato = contatoService.buscarPorId(id);
